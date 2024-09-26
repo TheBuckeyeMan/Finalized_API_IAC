@@ -1,6 +1,6 @@
 data "aws_ecr_image" "latest_image" {
-  repository_name = "<ECR Where Image is Located>"
-  image_tag       = "<Image Name of Image in ECR>"
+  repository_name = "youtube-containers"
+  image_tag       = "deleteapi"
 }
 
 data "aws_iam_role" "existing_lambda_role" {
@@ -8,7 +8,7 @@ data "aws_iam_role" "existing_lambda_role" {
 }
 
 resource "aws_lambda_function" "api_lambda" {
-  function_name = "<Name of your new Lambda Function>"
+  function_name = "deleteapi-lambda"
   role          = data.aws_iam_role.existing_lambda_role.arn
 
   package_type = "Image"

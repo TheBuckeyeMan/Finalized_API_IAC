@@ -6,7 +6,7 @@ on:
       - master
       - dev
       - UAT
-      - <Your Branch Here>
+      - delete
 
 jobs:
   build-and-deploy:
