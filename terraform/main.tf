@@ -9,7 +9,8 @@ data "aws_iam_role" "existing_lambda_role" {
 }
 
 resource "aws_lambda_function" "api_lambda" {
-  function_name = "deleteapi-lambda"
+  #function_name = "deleteapi-lambda"
+  function_name = "Python-lambda"
   role          = data.aws_iam_role.existing_lambda_role.arn
 
   package_type = "Image"
