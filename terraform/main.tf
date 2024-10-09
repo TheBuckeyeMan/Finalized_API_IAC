@@ -29,5 +29,4 @@ resource "aws_lambda_function_url" "lambda_url" {
   authorization_type = "NONE"
 }
 
-
 ##Add in additional code for AWS Event bridge, or API Gateway here for Lambda Deployment
