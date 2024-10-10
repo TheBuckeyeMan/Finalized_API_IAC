@@ -1,7 +1,6 @@
 data "aws_ecr_image" "latest_image" {
   repository_name = "youtube-containers"
-#  image_tag       = "deleteapi"
-  image_tag       = "pyapi"
+  image_tag       = "deleteapi"
 }
 
 data "aws_iam_role" "existing_lambda_role" {
@@ -9,8 +8,7 @@ data "aws_iam_role" "existing_lambda_role" {
 }
 
 resource "aws_lambda_function" "api_lambda" {
-  #function_name = "deleteapi-lambda"
-  function_name = "Python-lambda"
+  function_name = "deleteapi-lambda"
   role          = data.aws_iam_role.existing_lambda_role.arn
 
   package_type = "Image"
@@ -30,5 +28,6 @@ resource "aws_lambda_function_url" "lambda_url" {
   function_name = aws_lambda_function.api_lambda.function_name #Gives the AWS Lambda function a URL for us to trigger
   authorization_type = "NONE"
 }
+
 
 ##Add in additional code for AWS Event bridge, or API Gateway here for Lambda Deployment
