@@ -36,7 +36,7 @@ jobs:
 
       - name: Create or Select Workspace
         run: |
-          terraform workspace select logging-s3 || terraform workspace new logging-s3
+          terraform workspace select Logging_Bucket_Provision || terraform workspace new Logging_Bucket_Provision
         working-directory: terraform
 
       - name: Terraform Plan

@@ -2,10 +2,11 @@ terraform {
   cloud {
     organization = "1220-IAC"
     workspaces {
-      name = "logging-s3"
+      name = "Logging_Bucket_Provision"
     }
   }
 }
+
 provider "aws" {
     region = var.region
     access_key  = var.aws_access_key
