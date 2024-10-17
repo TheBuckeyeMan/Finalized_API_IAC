@@ -1,8 +1,8 @@
 terraform {
   cloud {
-    organization = "<Your Terraform Organization>"
+    organization = "1220-IAC"
     workspaces {
-      name = "<Your Workspace Name Here>"
+      name = "S3_Test"
     }
   }
 }

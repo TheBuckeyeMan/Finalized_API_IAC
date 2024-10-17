@@ -6,10 +6,10 @@ on:
       - main
       - dev
       - test
-      - <Your Branch Here>
+      - S3delete
 
 env:
-  TF_CLOUD_ORGANIZATION: "<Your Terraform Organization>"
+  TF_CLOUD_ORGANIZATION: "1220-IAC"
   CONFIG_DIRECTORY: "./"
   
 jobs:
@@ -36,7 +36,7 @@ jobs:
 
       - name: Create or Select Workspace
         run: |
-          terraform workspace select <Your Terraform Enterprise Workspace Here> || terraform workspace new <Your Terraform Enterprise Workspace Here>
+          terraform workspace select S3_Test || terraform workspace new S3_Test
         working-directory: terraform
 
       - name: Terraform Plan
