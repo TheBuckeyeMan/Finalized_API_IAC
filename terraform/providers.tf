@@ -1,3 +1,11 @@
+terraform {
+  cloud {
+    organization = "1220-IAC"
+    workspaces {
+      name = "<Your Workspace Name Here>"
+    }
+  }
+}
 provider "aws" {
     region = var.region
     access_key  = var.aws_access_key
