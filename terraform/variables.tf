@@ -13,7 +13,8 @@ variable "region" {
     type = string
     default = "us-east-2"
 }
-variable "Api_Key" {
-  description = "API Key"
-  type = string
+
+variable "bucket_name" {
+  description = "New_S3_Bucket"
+  type        = string
 }
