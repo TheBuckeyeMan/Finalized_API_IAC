@@ -3,14 +3,18 @@ name: Infrastructure CI/CD Pipeline
 on:
   push:
     branches:
-      - master
+      - main
       - dev
-      - UAT
+      - test
       - delete
 
+env:
+  TF_CLOUD_ORGANIZATION: "1220-IAC"
+  CONFIG_DIRECTORY: "./"
+  
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -21,14 +25,24 @@ jobs:
         with:
           terraform_version: 1.5.0
 
+      - name: Configure Terraform Cloud API Token
+        run: |
+          mkdir -p ~/.terraform.d
+          echo '{"credentials": {"app.terraform.io": {"token": "${{ secrets.TFE_TOKEN }}"}}}' > ~/.terraform.d/credentials.tfrc.json
+
       - name: Terraform Init
         run: terraform init
         working-directory: terraform
 
+      - name: Create or Select Workspace
+        run: |
+          terraform workspace select S3_Test || terraform workspace new S3_Test
+        working-directory: terraform
+
       - name: Terraform Plan
-        run: terraform plan -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" -var="Api_Key=${{ secrets.API_KEY }}"
+        run: terraform plan -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}"
         working-directory: terraform
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" -var="Api_Key=${{ secrets.API_KEY }}"
+        run: terraform apply -auto-approve -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}"
         working-directory: terraform

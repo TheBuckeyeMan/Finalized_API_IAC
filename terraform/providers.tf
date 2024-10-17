@@ -1,3 +1,12 @@
+terraform {
+  cloud {
+    organization = "1220-IAC"
+    workspaces {
+      name = "LambdaDeploy"
+    }
+  }
+}
+
 provider "aws" {
     region = var.region
     access_key  = var.aws_access_key
