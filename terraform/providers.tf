@@ -2,7 +2,7 @@ terraform {
   cloud {
     organization = "1220-IAC"
     workspaces {
-      name = "S3_Test"
+      name = "logging-s3"
     }
   }
 }
