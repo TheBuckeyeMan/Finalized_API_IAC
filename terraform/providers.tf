@@ -1,6 +1,6 @@
 terraform {
   cloud {
-    organization = "1220-IAC"
+    organization = "<Your Terraform Organization>"
     workspaces {
       name = "<Your Workspace Name Here>"
     }
