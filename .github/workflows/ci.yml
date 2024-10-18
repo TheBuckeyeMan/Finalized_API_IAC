@@ -36,7 +36,7 @@ jobs:
 
       - name: Create or Select Workspace
         run: |
-          terraform workspace select Logging_Bucket_Provision || terraform workspace new Logging_Bucket_Provision
+          terraform workspace select Landing_Bucket_Provisio || terraform workspace new Landing_Bucket_Provisio
         working-directory: terraform
 
       - name: Terraform Plan

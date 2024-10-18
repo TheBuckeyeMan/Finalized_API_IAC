@@ -1,2 +1,2 @@
 #UPDATE THE NAME OF THE BUCKET HERE FOR PROVISIONING A NEW BUCKET - IT MUST BE GLOBALLY UNIQUE
-bucket_name="logging-event-driven-bucket-1220-16492640"
+bucket_name="landing-data-bucket-1220-16492640"

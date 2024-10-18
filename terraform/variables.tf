@@ -17,5 +17,5 @@ variable "region" {
 variable "bucket_name" {
   description = "New_S3_Bucket"
   type        = string
-  default = "logging-event-driven-bucket-1220-16492640"
+  default = "landing-data-bucket-1220-16492640"
 }
