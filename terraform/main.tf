@@ -30,6 +30,7 @@ resource "aws_lambda_function_url" "lambda_url" {
 }
 
 
+
 ##Add in additional code for AWS Event bridge, or API Gateway here for Lambda Deployment
 
 //GPT SAID TO TRIGGER 1 time per day
