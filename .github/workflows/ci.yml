@@ -1,6 +1,8 @@
 name: Infrastructure CI/CD Pipeline
 
 on:
+  repository_dispatch:
+      types: [trigger-iac-workflow]
   push:
     branches:
       - main
@@ -46,3 +48,4 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" -var="Api_Key=${{ secrets.API_KEY }}"
         working-directory: terraform
+        
