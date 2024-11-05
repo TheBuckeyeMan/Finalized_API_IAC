@@ -2,7 +2,7 @@ name: Infrastructure CI/CD Pipeline
 
 on:
   repository_dispatch:
-      types: [trigger-iac-workflow]
+      types: [trigger_workflow]
   push:
     branches:
       - main
@@ -41,11 +41,6 @@ jobs:
           terraform workspace select LambdaDeploy || terraform workspace new LambdaDeploy
         working-directory: terraform
 
-      - name: Terraform Plan
-        run: terraform plan -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" -var="Api_Key=${{ secrets.API_KEY }}"
-        working-directory: terraform
-
       - name: Terraform Apply
         run: terraform apply -auto-approve -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" -var="Api_Key=${{ secrets.API_KEY }}"
         working-directory: terraform
-        
