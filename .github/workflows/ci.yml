@@ -1,8 +1,9 @@
 name: Infrastructure CI/CD Pipeline
 
 on:
-  repository_dispatch:
-    types: [trigger-workflow]
+  workflow_dispatch:
+
+
   push:
     branches:
       - main
