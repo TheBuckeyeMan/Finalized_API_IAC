@@ -3,14 +3,6 @@ name: Infrastructure CI/CD Pipeline
 on:
   workflow_dispatch:
 
-
-  push:
-    branches:
-      - main
-      - dev
-      - test
-      - delete
-
 env:
   TF_CLOUD_ORGANIZATION: "1220-IAC"
   CONFIG_DIRECTORY: "./"
