@@ -29,6 +29,12 @@ jobs:
         run: terraform init
         working-directory: terraform
 
+      - name: Upload Terraform Init State
+        uses: actions/upload-artifact@v3
+        with:
+          name: terraform-init
+          path: terraform/.terraform
+
 
   Select_TFE_Workspace:
     runs-on: ubuntu-latest
@@ -37,10 +43,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Download Terraform Init State
+        uses: actions/download-artifact@v3
+        with:
+          name: terraform-init
+          path: terraform/.terraform
+
       - name: Create or Select Workspace
         run: |
           terraform workspace select LambdaDeploy || terraform workspace new LambdaDeploy
         working-directory: terraform
+
+      - name: Upload Terraform Init State
+        uses: actions/upload-artifact@v3
+        with:
+          name: terraform-init
+          path: terraform/.terraform
 
 
   Deploy_Resources:
@@ -49,6 +67,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Download Terraform Init State
+        uses: actions/download-artifact@v3
+        with:
+          name: terraform-init
+          path: terraform/.terraform
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" -var="Api_Key=${{ secrets.API_KEY }}"
