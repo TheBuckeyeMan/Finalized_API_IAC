@@ -8,7 +8,7 @@ env:
   CONFIG_DIRECTORY: "./"
   
 jobs:
-  build-and-deploy:
+  Initialize_Terraform:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,12 +29,25 @@ jobs:
         run: terraform init
         working-directory: terraform
 
+
+  Select_TFE_Workspace:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Create or Select Workspace
         run: |
           terraform workspace select LambdaDeploy || terraform workspace new LambdaDeploy
         working-directory: terraform
 
+
+  Deploy_Resources:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
       - name: Terraform Apply
         run: terraform apply -auto-approve -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" -var="Api_Key=${{ secrets.API_KEY }}"
         working-directory: terraform
-        
