@@ -1,15 +1,10 @@
 name: Infrastructure CI/CD Pipeline
 
 on:
-  push:
-    branches:
-      - main
-      - dev
-      - test
-      - <Your Branch Here>
+  workflow_dispatch:
 
 env:
-  TF_CLOUD_ORGANIZATION: "<Your Terraform Organization>"
+  TF_CLOUD_ORGANIZATION: "1220-IAC"
   CONFIG_DIRECTORY: "./"
   
 jobs:
@@ -36,11 +31,7 @@ jobs:
 
       - name: Create or Select Workspace
         run: |
-          terraform workspace select <Your Terraform Enterprise Workspace Here> || terraform workspace new <Your Terraform Enterprise Workspace Here>
-        working-directory: terraform
-
-      - name: Terraform Plan
-        run: terraform plan -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" -var="Api_Key=${{ secrets.API_KEY }}"
+          terraform workspace select LambdaDeploy || terraform workspace new LambdaDeploy
         working-directory: terraform
 
       - name: Terraform Apply
